@@ -15,9 +15,7 @@ func ExampleWrapper() {
 	}
 
 	sort.Sort(&sorter.Wrapper{
-		LenFunc: func() int {
-			return len(s)
-		},
+		Length: len(s),
 		LessFunc: func(i, j int) bool {
 			return s[i] < s[j]
 		},
@@ -66,9 +64,7 @@ func ExampleNewWrapper() {
 	}
 
 	sort.Sort(sorter.NewWrapper(
-		func() int {
-			return len(s)
-		},
+		len(s),
 		func(i, j int) bool {
 			return s[i] < s[j]
 		},

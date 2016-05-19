@@ -6,19 +6,18 @@ import (
 )
 
 type (
-	FLen  func() int
 	FLess func(i, j int) bool
 	FSwap func(i, j int)
 )
 
 type Wrapper struct {
-	LenFunc  FLen
+	Length   int
 	LessFunc FLess
 	SwapFunc FSwap
 }
 
 func (w *Wrapper) Len() int {
-	return w.LenFunc()
+	return w.Length
 }
 
 func (w *Wrapper) Less(i, j int) bool {
@@ -29,9 +28,9 @@ func (w *Wrapper) Swap(i, j int) {
 	w.SwapFunc(i, j)
 }
 
-func NewWrapper(fLen FLen, fLess FLess, fSwap FSwap) sort.Interface {
+func NewWrapper(length int, fLess FLess, fSwap FSwap) sort.Interface {
 	return &Wrapper{
-		LenFunc:  fLen,
+		Length:   length,
 		LessFunc: fLess,
 		SwapFunc: fSwap,
 	}
